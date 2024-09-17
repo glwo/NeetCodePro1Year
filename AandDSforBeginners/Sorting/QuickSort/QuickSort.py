@@ -1,27 +1,22 @@
 class Solution:
-    def quickSort(self, pairs: List[Pair]) -> List[Pair]:
-        self.quickSortHelper(pairs, 0, len(pairs) - 1)
-        return pairs
-
+    def sortArray(self, nums: List[int]) -> List[int]:
+        self.quickSortHelper(nums, 0, (len(nums) - 1))
+        return nums
 
     def quickSortHelper(self, arr, s, e):
         if e - s + 1 <= 1:
             return
 
-        #In place
-        pivot = pairs[e] # right most
+        pivot = arr[e]
         left = s
-
         for i in range(s, e):
-            # partition
-            if pairs[i].key < pivot.key:
-                tmp = pairs[left]
-                pairs[left] = pairs[i]
-                pairs[i] = tmp
+            if arr[i] < pivot:
+                tmp = arr[left]
+                arr[left] = arr[i]
+                arr[i] = tmp
                 left += 1
+        arr[e] = arr[left]
+        arr[left] = pivot
 
-        pairs[e] = pairs[left]
-        pairs[left] = pivot
-
-        self.quickSortHelper(pairs, s, left - 1)
-        self.quickSortHelper(pairs, left + 1, e)
+        self.quickSortHelper(arr, s, left - 1)
+        self.quickSortHelper(arr, left + 1, e)
