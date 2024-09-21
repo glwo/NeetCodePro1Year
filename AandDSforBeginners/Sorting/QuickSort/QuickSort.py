@@ -68,3 +68,15 @@ class Solution:
                 return e
             else:
                 return mid
+
+class Solution:
+    def sortArray(self, arr: List[int]) -> List[int]:
+        if len(arr) <= 1:
+            return arr
+
+        pivot = arr[-1]
+
+        left = [x for x in arr[:-1] if x <= pivot]
+        right = [x for x in arr[:-1] if x > pivot]
+
+        return self.sortArray(left) + [pivot] + self.sortArray(right)
