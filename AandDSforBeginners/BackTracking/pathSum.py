@@ -11,7 +11,7 @@ class Solution:
 
             return (dfs(node.right, currSum)) or (dfs(node.left, currSum))
 
-        dfs(root, 0)
+        return dfs(root, 0)
 
 class Solution:
     def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
