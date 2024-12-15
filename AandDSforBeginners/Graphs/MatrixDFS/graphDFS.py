@@ -22,3 +22,27 @@ class Solution:
             return count
 
         return helper(grid, 0, 0, set())
+
+    def countPaths(self, grid: List[List[int]]) -> int:
+        ROWS, COLS = len(grid), len(grid[0])
+        stack = [(0, 0, set())]
+        path_count = 0
+
+        while stack:
+            r, c, visit = stack.pop()
+
+            if (min(r, c) < 0 or r == ROWS or c == COLS or (r, c) in visit or grid[r][c] == 1):
+                continue
+            if r == ROWS - 1 and c == COLS - 1:
+                path_count += 1
+                continue
+
+            new_visit = visit.copy()
+            new_visit.add((r, c))
+
+            stack.append((r + 1, c, new_visit))
+            stack.append((r - 1, c, new_visit))
+            stack.append((r, c + 1, new_visit))
+            stack.append((r, c - 1, new_visit))
+
+        return path_count
